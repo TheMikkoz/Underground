@@ -19,9 +19,10 @@ if __name__ == "__main__":
     winX = 800
     winY = 800
     winSize = winX, winY
+    #Position to middle
     environ['SDL_VIDEO_WINDOW_POS'] = '%i,%i' % (0,0)
     environ['SDL_VIDEO_CENTERED'] = '0'
-    win = pg.display.set_mode(winSize)
+    win = pg.display.set_mode(winSize, pg.NOFRAME)
 
     #Main loop active
     Run = True
@@ -29,19 +30,44 @@ if __name__ == "__main__":
     #Limit Frame per sec
     Clock = pg.time.Clock()
 
+    def image(png):
+        img = pg.image.load("assets/img/" + png)
+        return img
+
     #Loading assets
     def LoadAssets():
         Dictionary = {
-            "1":pg.image.load("assets/01.png"),
-            "exit0":pg.image.load("assets/exitX00.png"),
-            "exit1":pg.image.load("assets/exitX01.png")       
+            "1":image("background/01.png"),
+            "exit0":image("exit/exitX00.png"),
+            "exit1":image("exit/exitX01.png"),
+            "player":{
+                    "headIdle":{
+                        0:image("player/headIdle00.png"),
+                        1:image("player/headIdle01.png"),
+                        2:image("player/headIdle02.png"),
+                        3:image("player/headIdle00.png"),
+                        4:image("player/headIdle00.png"),
+                    },
+                    #"":image(".png"),
+                    #"":image(".png"),
+                    "tail":image("player/tail00.png"),
+                    "tailEnd":image("player/tailEnd00.png"),
+                    }       
             }
         return Dictionary
     try:
         Asset = LoadAssets()
-    except:
-        Debug("Couldn't load assets.")
+    except Exception as exp:
+        Debug("Couldn't load assets. " + str(exp))
 
+    #user events
+    usereventDic = {"playerAnimation":pg.USEREVENT # 24
+    }
+    eventTimerDic = {"playerAnimation": 200}
+    for dic in usereventDic:
+        pg.time.set_timer(usereventDic[dic], eventTimerDic[dic])
+
+    #Hover
     exitHover = False
 
     #>| Background |<

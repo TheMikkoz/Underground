@@ -2,3 +2,9 @@ Couldn't load assets.
 Couldn't load assets.
 Couldn't load assets.
 Couldn't load assets.
+Couldn't load assets.
+Couldn't load assets.
+Couldn't load assets. name 'pygame' is not defined
+Couldn't load assets. Couldn't open assets/background/01.png
+Couldn't load assets. Couldn't open assets/img/headIdle00.png
+Couldn't load assets. Couldn't open assets/img/.png
